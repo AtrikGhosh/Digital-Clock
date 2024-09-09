@@ -23,6 +23,7 @@ body{
     scale: 1;
     box-shadow: inset 5px 5px 25px rgba(0, 0, 0, 0.25);
     border-radius: 50%;
+    
 }
 
 .analog::before{
@@ -31,7 +32,7 @@ body{
     width: 5px;
     height: 5px;
     background: #2f363e;
-    z-index: 10000;
+    z-index: 100;
     border: 1px solid #fff;
     border-radius: 50%;
 }
@@ -58,16 +59,21 @@ body{
 }
 
 #time .circle:nth-child(1) svg{
+    width: 610px;
+    height: 610px;
+}
+
+#time .circle:nth-child(2) svg{
     width: 250px;
     height: 250px;
 }
 
-#time .circle:nth-child(2) svg{
+#time .circle:nth-child(3) svg{
     width: 210px;
     height: 210px;
 }
 
-#time .circle:nth-child(3) svg{
+#time .circle:nth-child(4) svg{
     width: 170px;
     height: 170px;
 }
@@ -83,19 +89,34 @@ body{
     opacity: 0.25;
 }
 
+
 #time .circle:nth-child(1) svg circle
+{
+    opacity: 0.55;
+    stroke-dasharray: 942,942;
+}
+
+
+#time .circle:nth-child(1) svg #moon_circle
+{
+    stroke-dashoffset: 942;
+}
+
+
+
+#time .circle:nth-child(2) svg circle
 {
     stroke-dasharray: 760;
     stroke-dashoffset: 760;
 }
 
-#time .circle:nth-child(2) svg circle
+#time .circle:nth-child(3) svg circle
 {
     stroke-dasharray: 630;
     stroke-dashoffset: 630;
 }
 
-#time .circle:nth-child(3) svg circle
+#time .circle:nth-child(4) svg circle
 {
     stroke-dasharray: 510;
     stroke-dashoffset: 510;
@@ -121,6 +142,7 @@ body{
     border-radius: 50%;
     box-shadow: 0 0 40px var(--clr);
 }
+
 
 .analog, .digital{
     display: none;
@@ -207,20 +229,75 @@ body{
     gap: 15px;
     font-size: 1.5rem;
     font-weight: bold;
+}
+.timeBx #hours::after, .timeBx #minutes::after {
+content: ':';
+position: absolute;
+}
+
+.timeBx div {
+color: var(--c);
+text-shadow: 0 0 10px var(--c), 0 0 20px var(--c)
+}
+
+.ap {
+position: absolute;
+transform: translatey(-15px);
+font-size: 0.5em;
+right: 45px;
+}
+
+.sun_moon{
+    z-index: -2;
+    transform: rotate(180deg);
+}
+.sun_moon_dot {
+    align-items: center;
   }
-  .timeBx #hours::after,
-  .timeBx #minutes::after {
-    content: ':';
+  
+  .sun_moon_dot img {
+
+    border-radius: 50%;
     position: absolute;
   }
-  .timeBx div {
-    color: var(--c);
-    text-shadow: 0 0 10px var(--c),
-      0 0 20px var(--c)
+  
+  .sun_moon_dot img.sun {
+    background-color: rgba(255, 255, 0, 0.275);
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 100px rgba(255, 255, 0);
+    transform: translateY(-300px);
   }
-  .ap {
+  
+  .sun_moon_dot img.moon {
+    background: rgba(255, 255, 255, 0.275);
+    border-radius: 50%;
+    box-shadow: 0 0 100px #ffff;
+    transform: translateY(300px);
+  }
+  
+
+
+
+
+  .mountain {
     position: absolute;
-    transform: translatey(-15px);
-    font-size: 0.5em;
-    right: 45px;
+    /* bottom: 0; */
+    /* width: 100%; */
+    height: 100%;
+    z-index:   999999999;
+    /* background: url('dak-bar-mountains-e1595525568311.png') no-repeat center bottom; */
+    background-size: cover;
+    pointer-events: none; /* So that it doesn't block interactions with other elements */
   }
+
+  /* .mountain {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    background: url('dak-bar-mountains-e1595525568311.png') no-repeat bottom;
+    background-size: cover;
+    z-index: 1;
+    pointer-events: none;
+  } */

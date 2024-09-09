@@ -7,8 +7,23 @@
     <link rel = "stylesheet" href = "styles.css">
 </head>
 <body>
+    <img class = "mountain" src="dak-bar-mountains-e1595525568311.png" height = "100%">
     <div class="clock">
         <div id="time">
+            <div class="circle sun_moon">
+                <div class="dots sun_moon_dot">
+                    <img src="clear-day.svg" alt="Sun" class="sun visible" width="100px">
+                    <img src="clear-night.svg" alt="Moon" class="moon" width="100px">
+                </div>               
+                <svg>
+                  <!-- Sun circle -->
+                  <circle cx="300" cy="300" r="300" id="sun_circle" style="--clr: yellow;"></circle>
+                  <!-- Moon circle -->
+                  <circle cx="300" cy="300" r="300" id="moon_circle" style="--clr: white;"></circle>
+                </svg>
+                
+            </div>
+            
             <div class="circle" style = "--clr: #ff2972;">
                 <div class="dots sec_dot"></div>
                 <svg>
@@ -70,6 +85,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
     
     <script>
@@ -85,6 +101,9 @@
             let hh = document.getElementById('hh');
             let mm = document.getElementById('mm');
             let ss = document.getElementById('ss');
+            let sunmoon = document.querySelector('.sun_moon');
+            let sun = document.querySelector(".sun");
+            let moon = document.querySelector(".moon");
             
             let sec_dot = document.querySelector(".sec_dot");
             let min_dot = document.querySelector(".min_dot");
@@ -98,8 +117,11 @@
             let h = date.getHours();
             let m = date.getMinutes();
             let s = date.getSeconds();
+            
+            sunmoon.style.transform =  `rotate(${-90 + ((h+m/60)-6)*15}deg)`;
+            moon.style.transform = `translateY(300px) rotate(${90-((h+m/60)-6)*15}deg)`;
 
-            hh.style.strokeDashoffset = 510 - (510*((h > 12 ? h - 12 : h)+m/60))/12 ;
+            hh.style.strokeDashoffset = 510 - (510*((h >= 12 ? h - 12 : h)+m/60))/12 ;
             //12hr clock
 
             mm.style.strokeDashoffset = 630 - (630*(m+s/60))/60;
