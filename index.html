@@ -18,7 +18,7 @@
         <div class="itemRight item3"><img src= "cloudy.svg" height="130px" ></div>
       </div>
     <img class = "mountain" src="dak-bar-mountains-e1595525568311.png" height = "100%">
-    <div class="clock">
+    <div class="clock container">
         <div id="time">
             <div class="circle sun_moon">
                 <div class="dots sun_moon_dot">
@@ -55,45 +55,47 @@
                 </svg>
             </div>
 
-            <div class = "analog  visible">
-                <div class = "needles n1" style = "--clr2:#ff2672;" id = "sc">
-                <i> </i>
+            <div class="card">
+                <div class = "analog front">
+                    <div class = "needles n1" style = "--clr2:#ff2672;" id = "sc">
+                    <i> </i>
+                    </div>
+
+                    <div class = "needles n2" style = "--clr2:#fee800;" id = "mn">
+                    <i> </i>
+                    </div>
+
+                    <div class = "needles n3" style = "--clr2:#04fc43;" id = "hr">
+                    <i> </i>
+                    </div>
+
+                    <div class = "center_dot">
+                        <i></i>
+                    </div>
+
+                    <span style="--i:1;"><b>1</b></span>
+                    <span style="--i:2;"><b>2</b></span>
+                    <span style="--i:3;"><b>3</b></span>
+                    <span style="--i:4;"><b>4</b></span>
+                    <span style="--i:5;"><b>5</b></span>
+                    <span style="--i:6;"><b>6</b></span>
+                    <span style="--i:7;"><b>7</b></span>
+                    <span style="--i:8;"><b>8</b></span>
+                    <span style="--i:9;"><b>9</b></span>
+                    <span style="--i:10;"><b>10</b></span>
+                    <span style="--i:11;"><b>11</b></span>
+                    <span style="--i:12;"><b>12</b></span>
                 </div>
 
-                <div class = "needles n2" style = "--clr2:#fee800;" id = "mn">
-                <i> </i>
+                <div class = "digital back">
+                    <div class="timeBx">
+                        <div id="hours" style="--c:#04fc43">00</div>
+                        <div id="minutes" style="--c:#fee800">00</div>
+                        <div id="seconds" style="--c:#ff2972">00</div>
+                        <div class="ap" style="--c:#fff"><div id="ampm"></div>
+                    </div>
                 </div>
-
-                <div class = "needles n3" style = "--clr2:#04fc43;" id = "hr">
-                <i> </i>
-                </div>
-
-                <div class = "center_dot">
-                    <i></i>
-                </div>
-
-                <span style="--i:1;"><b>1</b></span>
-                <span style="--i:2;"><b>2</b></span>
-                <span style="--i:3;"><b>3</b></span>
-                <span style="--i:4;"><b>4</b></span>
-                <span style="--i:5;"><b>5</b></span>
-                <span style="--i:6;"><b>6</b></span>
-                <span style="--i:7;"><b>7</b></span>
-                <span style="--i:8;"><b>8</b></span>
-                <span style="--i:9;"><b>9</b></span>
-                <span style="--i:10;"><b>10</b></span>
-                <span style="--i:11;"><b>11</b></span>
-                <span style="--i:12;"><b>12</b></span>
-            </div>
-
-            <div class = "digital">
-                <div class="timeBx">
-                    <div id="hours" style="--c:#04fc43">00</div>
-                    <div id="minutes" style="--c:#fee800">00</div>
-                    <div id="seconds" style="--c:#ff2972">00</div>
-                    <div class="ap" style="--c:#fff"><div id="ampm"></div>
-                </div>
-            </div>
+        </div>
         </div>
         
     </div>
@@ -101,11 +103,10 @@
     <script>
 
         
-        document.querySelector("#time").addEventListener("click", () =>{
-            document.querySelector(".analog").classList.toggle("visible");
-            document.querySelector(".digital").classList.toggle("visible");
+        // document.querySelector("#time").addEventListener("click", () =>{
+        //     document.querySelector(".card").classList.toggle('flipped');
             
-        });
+        // });
         
         setInterval(()=>{
             let hh = document.getElementById('hh');
@@ -127,7 +128,7 @@
             let h = date.getHours();
             let m = date.getMinutes();
             let s = date.getSeconds();
-            
+
             sunmoon.style.transform =  `rotate(${-90 + ((h+m/60)-6)*15}deg)`;
             moon.style.transform = `translateY(300px) rotate(${90-((h+m/60)-6)*15}deg)`;
 

@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 body{
     display: flex;
     flex-direction: column;
@@ -12,6 +13,7 @@ body{
     min-height: 100vh;
     overflow: hidden;
     background: #2f363e ;
+    scale:1;
 }
 
 .clock{
@@ -200,7 +202,7 @@ body{
 
 #time span{
     position: absolute;
-    inset: 55px;
+    inset: 0px;
     text-align: center;
     color: #999;
     font-family: consolas;
@@ -213,10 +215,6 @@ body{
     font-weight: 500;
     display: inline-block;
     transform: rotate(calc(-30deg * var(--i)));
-}
-
-.visible {
-    display: flex;
 }
 
 .timeBx {
@@ -244,7 +242,7 @@ text-shadow: 0 0 10px var(--c), 0 0 20px var(--c)
 
 .ap {
 position: absolute;
-transform: translatey(-15px);
+transform: translate(40px,-15px);
 font-size: 0.5em;
 right: 45px;
 }
@@ -255,34 +253,34 @@ right: 45px;
 }
 .sun_moon_dot {
     align-items: center;
-  }
-  
-  .sun_moon_dot img {
+}
+
+.sun_moon_dot img {
 
     border-radius: 50%;
     position: absolute;
-  }
-  
-  .sun_moon_dot img.sun {
+}
+
+.sun_moon_dot img.sun {
     background-color: rgba(255, 255, 0, 0.275);
     border: 0;
     border-radius: 50%;
     box-shadow: 0 0 100px rgba(255, 255, 0);
     transform: translateY(-300px);
-  }
-  
-  .sun_moon_dot img.moon {
+}
+
+.sun_moon_dot img.moon {
     background: rgba(255, 255, 255, 0.275);
     border-radius: 50%;
     box-shadow: 0 0 100px #ffff;
     transform: translateY(300px);
-  }
-  
+}
 
 
 
 
-  .mountain {
+
+.mountain {
     position: absolute;
     /* bottom: 0; */
     /* width: 100%; */
@@ -291,7 +289,7 @@ right: 45px;
     /* background: url('dak-bar-mountains-e1595525568311.png') no-repeat center bottom; */
     background-size: cover;
     pointer-events: none; /* So that it doesn't block interactions with other elements */
-  }
+}
 
   /* .mountain {
     position: absolute;
@@ -342,6 +340,7 @@ right: 45px;
   position: absolute;
   animation-timing-function: linear;
   animation-duration: 60s;
+
   animation-iteration-count: infinite;
   opacity: 0.1;
 }
@@ -378,4 +377,45 @@ right: 45px;
 
 .itemLeft.item3 {
     animation-delay: calc(120s / 3 * (3 - 3) * -1);
+}
+
+.card{
+    display: flex;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    transition: all 1s linear;
+    transform-style: preserve-3d;
+    background: transparent;
+}
+
+.front,
+.back{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+}
+
+
+.front{
+    fill: none;
+    border-radius:50% ;
+    z-index: -10000;
+    backface-visibility:hidden;
+}
+
+.back{
+    border-radius:50% ;
+    z-index: -10001;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+
+.card.flipped{
+    transform: rotateY(180deg);
+}
+
+.container:hover .card{
+    transform: rotateY(180deg);
 }
