@@ -100,14 +100,56 @@
         
     </div>
     
-    <script>
+    <script defer>
 
         
-        // document.querySelector("#time").addEventListener("click", () =>{
-        //     document.querySelector(".card").classList.toggle('flipped');
+        document.querySelector("#time").addEventListener("click", () =>{
+            document.querySelector(".card").classList.toggle('flipped');
             
-        // });
+        });
+
+
         
+        // colour gradient2
+        const gradients = [
+    { color1: "#012459", color2: "#001322" },
+    { color1: "#003972", color2: "#001322" },
+    { color1: "#003972", color2: "#001322" },
+    { color1: "#004372", color2: "#00182b" },
+    { color1: "#004372", color2: "#011d34" },
+    { color1: "#016792", color2: "#00182b" },
+    { color1: "#07729f", color2: "#042c47" },
+    { color1: "#12a1c0", color2: "#07506e" },
+    { color1: "#74d4cc", color2: "#1386a6" },
+    { color1: "#efeebc", color2: "#61d0cf" },
+    { color1: "#fee154", color2: "#a3dec6" },
+    { color1: "#fdc352", color2: "#e8ed92" },
+    { color1: "#ffac6f", color2: "#ffe467" },
+    { color1: "#fda65a", color2: "#ffe467" },
+    { color1: "#fd9e58", color2: "#ffe467" },
+    { color1: "#f18448", color2: "#ffd364" },
+    { color1: "#f06b7e", color2: "#f9a856" },
+    { color1: "#ca5a92", color2: "#f4896b" },
+    { color1: "#5b2c83", color2: "#d1628b" },
+    { color1: "#371a79", color2: "#713684" },
+    { color1: "#28166b", color2: "#45217c" },
+    { color1: "#192861", color2: "#372074" },
+    { color1: "#040b3c", color2: "#233072" },
+    { color1: "#040b3c", color2: "#012459" }
+];
+
+ 
+        //method-2
+        function interpolateColor(color1, color2, factor) {
+            const result = color1.slice(1).match(/.{2}/g)
+                .map((color, i) => Math.round(parseInt(color, 16) * (1 - factor) + parseInt(color2.slice(1).match(/.{2}/g)[i], 16) * factor))
+                .map(num => num.toString(16).padStart(2, '0'))
+                .join('');
+            return `#${result}`;
+        }
+
+
+
         setInterval(()=>{
             let hh = document.getElementById('hh');
             let mm = document.getElementById('mm');
@@ -128,6 +170,28 @@
             let h = date.getHours();
             let m = date.getMinutes();
             let s = date.getSeconds();
+            
+            //method-1
+            // document.body.className = `sky-gradient-${h}`;
+
+            //method-2
+            const totalSeconds = h * 3600 + m * 60 + s;
+            const totalDaySeconds = 24*60*60;
+
+            
+            const gradientIndex = Math.floor(totalSeconds / (totalDaySeconds / gradients.length));
+            const nextIndex = (gradientIndex + 1) % gradients.length;
+            
+            const currentGradient = gradients[gradientIndex];
+            const nextGradient = gradients[nextIndex];
+            
+            const factor = (totalSeconds % (totalDaySeconds / gradients.length)) / (totalDaySeconds / gradients.length);
+            
+            const interpolatedColor1 = interpolateColor(currentGradient.color1, nextGradient.color1, factor);
+            const interpolatedColor2 = interpolateColor(currentGradient.color2, nextGradient.color2, factor);
+            
+            document.body.style.background = `linear-gradient(to bottom, ${interpolatedColor1}, ${interpolatedColor2})`;
+    
 
             sunmoon.style.transform =  `rotate(${-90 + ((h+m/60)-6)*15}deg)`;
             moon.style.transform = `translateY(300px) rotate(${90-((h+m/60)-6)*15}deg)`;
@@ -174,8 +238,6 @@
             ampm.innerHTML = am;
         });
         
-
-
     </script>
 </body>
 </html>
